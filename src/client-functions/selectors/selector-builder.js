@@ -90,24 +90,26 @@ export default class SelectorBuilder extends ClientFunctionBuilder {
     }
 
     _executeCommand (args, testRun, callsite) {
-        
+
         if (this.fn.toString().startsWith('(xpath)')) {
             if (args.length > 0) {
-        
-                const replaceableItem = 'Selector([function])'
-        
-                if (this.options.apiFn == replaceableItem) {
+
+                const replaceableItem = 'Selector([function])';
+
+                if (this.options.apiFn === replaceableItem) {
                     const item = `XPathSelector("${args[0]}")`;
+
                     this.options.apiFn = item;
                     const replaceIndex = this.options.apiFnChain.indexOf(replaceableItem);
+
                     if (replaceIndex >= 0)
-                    this.options.apiFnChain[replaceIndex] = item;
+                        this.options.apiFnChain[replaceIndex] = item;
                 }
             }
             else
-                throw "Unable to collect xpath locator, this is hardcode, so fix that"
+                throw 'Unable to collect xpath locator, this is hardcode, so fix that';
         }
-        
+
         const resultPromise = super._executeCommand(args, testRun, callsite);
 
         this._addBoundArgsSelectorGetter(resultPromise, args);
