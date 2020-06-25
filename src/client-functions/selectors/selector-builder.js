@@ -106,8 +106,6 @@ export default class SelectorBuilder extends ClientFunctionBuilder {
                         this.options.apiFnChain[replaceIndex] = item;
                 }
             }
-            else
-                throw 'Unable to collect xpath locator, this is hardcode, so fix that';
         }
 
         const resultPromise = super._executeCommand(args, testRun, callsite);
